@@ -145,7 +145,7 @@ const loginUsuario = async (req, res) => {
       return res.status(400).send({ message: "Senha inválida" });
     }
 
-    // token formado por user.cpf e user.senha, onde o segredo é informada no body da requisição
+    // token formado por user e cpf, onde o secredo (key) é o cpf informada no body da requisição
     const token = usuariosServices.generateToken(user, segredo(req, res));
 
     // se houver validação positiva
@@ -174,7 +174,7 @@ const validarToken = (req, res) => {
       return res.status(401).send({ message: "Token mal formatado!" });
     }
 
-    // token formado por user.cpf e user.senha, onde o segredo é informada no body da requisição
+    // o secredo (key) é o cpf informada no body da requisição
 
     jwt.verify(token, segredo(req, res), async (err, decoded) => {
       if (err) {
